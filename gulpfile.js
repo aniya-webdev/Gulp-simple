@@ -2,6 +2,7 @@ const gulp = require('gulp')
 const less = require('gulp-less')
 const sass = require('gulp-sass')(require('sass'));
 const newer = require('gulp-newer');
+const concat = require('gulp-concat');
 const imagemin = require('gulp-imagemin')
 const autoprefixer = require('gulp-autoprefixer')
 const plumber = require("gulp-plumber")
@@ -49,12 +50,13 @@ function html() {
 //Задача для обработки стилей
 
 function styles() {
-	return gulp.src(paths.styles.src, {base: "src/styles/"})
+	return gulp.src(paths.styles.src)
 	.pipe(sourcemaps.init())
 	.pipe(less())					
-    .pipe(autoprefixer({
+	.pipe(autoprefixer({
+		browsers: ['last 8 versions'],
 		cascade: false
-	}))		
+}))	
 	.pipe(plumber())
 	.pipe(sourcemaps.write("."))
 	.pipe(gulp.dest(paths.styles.dest))
