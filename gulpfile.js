@@ -2,7 +2,6 @@ const gulp = require('gulp')
 const less = require('gulp-less')
 const sass = require('gulp-sass')(require('sass'));
 const newer = require('gulp-newer');
-const concat = require('gulp-concat');
 const imagemin = require('gulp-imagemin')
 const autoprefixer = require('gulp-autoprefixer')
 const plumber = require("gulp-plumber")
@@ -54,7 +53,7 @@ function styles() {
 	.pipe(sourcemaps.init())
 	.pipe(less())					
 	.pipe(autoprefixer({
-		browsers: ['last 8 versions'],
+		overrideBrowserslist: ['last 8 versions'],
 		cascade: false
 }))	
 	.pipe(plumber())
