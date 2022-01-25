@@ -16,9 +16,9 @@ const paths = {
 		dest: 'dist/'
 	},
 	styles: {
-		src: 'src/styles/**/styles.less',
+		src: ['src/styles/**/styles.less', 'src/styles/**/styles.sass', 'src/styles/**/styles.scss'],
 		dest: 'dist/css/',
-		watch: 'src/styles/**/*.less'
+		watch: ['src/styles/**/styles.less', 'src/styles/**/styles.sass', 'src/styles/**/styles.scss']
 	},
 	scripts: {
 		src: 'src/scripts/**/*.js',
@@ -52,6 +52,7 @@ function styles() {
 	return gulp.src(paths.styles.src)
 	.pipe(sourcemaps.init())
 	.pipe(less())					
+	// .pipe(sass())					
 	.pipe(autoprefixer({
 		overrideBrowserslist: ['last 8 versions'],
 		cascade: false
