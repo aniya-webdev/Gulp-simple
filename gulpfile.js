@@ -5,6 +5,7 @@ const newer = require('gulp-newer');
 const imagemin = require('gulp-imagemin')
 const autoprefixer = require('gulp-autoprefixer')
 const plumber = require("gulp-plumber")
+const panini = require("panini")
 const sourcemaps = require('gulp-sourcemaps')
 const browserSync = require('browser-sync').create()
 const del = require('del')
@@ -40,8 +41,16 @@ function clean() {
 
 //Задача для обработки html
 function html() {
+	panini.refresh();
 	return gulp.src(paths.html.src)
 	.pipe(plumber())
+	.pipe(panini({
+		root: 'src/',
+		layouts: 'src/tpl/layouts/',
+		partials: 'src/tpl/partials/',
+		helpers: 'src/tpl/helpers/',
+		data: 'src/tpl/data/'
+	  }))
 	.pipe(gulp.dest(paths.html.dest))
 	.pipe(browserSync.stream())
 }
