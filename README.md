@@ -7,7 +7,8 @@
 3. Команда: gulp
 
 ### Плагины:
-- gulp-less
+- gulp-sass
+- gulp-less (в файле gulpfile.js необходимо заменить в "const paths" less / scss, а также в функции styles)
 - browser-sync
 - gulp-imagemin
 - gulp-autoprefixer
@@ -16,4 +17,3 @@
 - gulp-watch
 - gulp-newer
 - del
-- gulp-sass (в файле gulpfile.js необходимо заменить в "const paths" less на scss, а также в функции styles)
