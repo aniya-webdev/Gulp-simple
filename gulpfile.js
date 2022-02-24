@@ -10,6 +10,7 @@ const browserSync = require('browser-sync').create()
 const del = require('del')
 
 //Путь
+
 const paths = {
 	html: {
 		src: 'src/*.html',
@@ -31,6 +32,10 @@ const paths = {
 	fonts: {
 		src: 'src/fonts/**',
 		dest: 'dist/fonts'
+	},
+	libs: {
+		src: 'src/libs/**',
+		dest: 'dist/libs'
 	}
 }
 
@@ -39,6 +44,7 @@ function clean() {
 }
 
 //Задача для обработки html
+
 function html() {
 	return gulp.src(paths.html.src)
 	.pipe(plumber())
@@ -74,6 +80,7 @@ function scripts() {
 }
 
 // Задача для обработки изображений
+
 function img() {
 	return gulp.src(paths.images.src)
 	.pipe(newer(paths.images.dest))
@@ -92,7 +99,16 @@ function fonts() {
 	.pipe(browserSync.stream())
 }
 
+//Задача для обработки библиотек
+
+function libs() {
+	return gulp.src(paths.libs.src)
+	.pipe(gulp.dest(paths.libs.dest))
+	.pipe(browserSync.stream())
+}
+
 //Отслеживание
+
 function watch() {
 	browserSync.init({
 		server: {
@@ -105,9 +121,10 @@ function watch() {
 	gulp.watch(paths.scripts.src, scripts)
 	gulp.watch(paths.images.src, img)
 	gulp.watch(paths.fonts.src, fonts)
+	gulp.watch(paths.libs.src, libs)
 }
 
-const build = gulp.series(clean, gulp.parallel(html, styles, scripts, img, fonts), watch)
+const build = gulp.series(clean, gulp.parallel(html, styles, scripts, img, fonts, libs), watch)
 
 exports.clean = clean,
 exports.img = img,
@@ -115,6 +132,7 @@ exports.html = html,
 exports.styles = styles,
 exports.scripts = scripts,
 exports.fonts = fonts,
+exports.libs = libs,
 exports.watch = watch,
 exports.build = build,
 exports.default = build
