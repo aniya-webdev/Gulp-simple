@@ -10,7 +10,6 @@ const browserSync = require('browser-sync').create()
 const del = require('del')
 
 //Путь
-
 const paths = {
 	html: {
 		src: 'src/*.html',
@@ -44,7 +43,6 @@ function clean() {
 }
 
 //Задача для обработки html
-
 function html() {
 	return gulp.src(paths.html.src)
 	.pipe(plumber())
@@ -80,7 +78,6 @@ function scripts() {
 }
 
 // Задача для обработки изображений
-
 function img() {
 	return gulp.src(paths.images.src)
 	.pipe(newer(paths.images.dest))
@@ -108,7 +105,6 @@ function libs() {
 }
 
 //Отслеживание
-
 function watch() {
 	browserSync.init({
 		server: {
